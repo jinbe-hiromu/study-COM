@@ -266,8 +266,25 @@ SafeArrayGetElement(psa, &index, &outValue);
 SafeArrayDestroy(psa);
 ~~~
 
+---
 
+## CComSafeArray型
+SafeArray型のラッパークラス
+自動でVARIANTInit、VariantClearをしてくれる。
+代入された値に合わせて型情報も変更してくれる。
 
+~~~ C++
+    // CComSafeArray<int> で int32 配列を作成（下限 0、要素数 5）
+    CComSafeArray<int> arr(5);
+
+    // 要素をセット
+    arr.SetAt(0, 123);
+
+    // 要素を取得
+    int outValue = arr.GetAt(0);
+
+    // 解放処理は自動
+~~~
 
 
 ---
@@ -283,3 +300,5 @@ SafeArrayDestroy(psa);
 COMはWindowsの技術。非クロスプラットフォーム。
 - 後継技術の登場
 .NETなどのOSを超えて使える仕組みに押されていった
+
+➡COMは古い技術なので、今からアプリ開発をするときは使用を避けるべき。
